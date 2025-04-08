@@ -6,10 +6,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.superheroapp.R
-import com.example.superheroapp.Utils.SuperheroService
+import com.example.superheroapp.adapters.SuperheroAdapter
 import com.example.superheroapp.data.Superhero
+import com.example.superheroleague.utils.SuperheroService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,7 +19,7 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
 
     lateinit var recyclerView: RecyclerView
-    lateinit var adapter: Adapter
+    lateinit var adapter: SuperheroAdapter
 
     var superheroList: List<Superhero> = emptyList()
 
@@ -33,6 +35,11 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerView)
 
+        adapter = SuperheroAdapter(superheroList)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = GridLayoutManager(this, 2)
+
+        searchSuperheroes("a")
 
     }
 
