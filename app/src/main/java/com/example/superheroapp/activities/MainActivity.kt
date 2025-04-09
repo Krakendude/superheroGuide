@@ -1,7 +1,6 @@
 package com.example.superheroapp.activities
 
 import android.os.Bundle
-import android.widget.Adapter
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -11,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.superheroapp.R
 import com.example.superheroapp.adapters.SuperheroAdapter
 import com.example.superheroapp.data.Superhero
-import com.example.superheroleague.utils.SuperheroService
+import com.example.superheroleague.utils.superheroService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -47,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         // Llamada en un hilo secundario
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val service = SuperheroService.getInstance()
+                val service = superheroService.getInstance()
                 val response = service.findSuperheroesByName(query)
                 superheroList = response.results
 
