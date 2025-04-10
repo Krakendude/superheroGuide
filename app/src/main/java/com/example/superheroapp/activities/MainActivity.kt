@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = GridLayoutManager(this, 2)
 
-        searchSuperheroes("a")
+        searchSuperheroes("spider")
 
     }
 
