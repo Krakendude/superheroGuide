@@ -1,6 +1,7 @@
 package com.example.superheroapp.activities
 
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -9,6 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.superheroapp.R
 import com.example.superheroapp.data.Superhero
+import com.example.superheroapp.databinding.ActivityDetailBinding
 import com.example.superheroleague.utils.superheroService
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
@@ -22,15 +24,15 @@ class DetailActivity : AppCompatActivity() {
         const val SUPERHERO_ID = "SUPERHERO_ID"
     }
 
-    lateinit var nameTextView: TextView
-    lateinit var avatarImageView: ImageView
+    lateinit var binding: ActivityDetailBinding
 
     lateinit var superhero: Superhero
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_detail)
+        binding = ActivityDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -39,10 +41,22 @@ class DetailActivity : AppCompatActivity() {
 
         val id = intent.getStringExtra(SUPERHERO_ID)!!
 
-        avatarImageView = findViewById(R.id.avatarImageView)
-        nameTextView = findViewById(R.id.nameTextView)
-
         getSuperheroById(id)
+
+        binding.navigationView.setOnItemSelectedListener { menuITem ->
+            binding.contentBiography.visibility = View.GONE
+            binding.contentAppearance.visibility = View.GONE
+            binding.contentStats.visibility = View.GONE
+
+            when (menuITem.itemId) {
+                R.id.menu_biography -> binding.contentBiography.visibility = View.VISIBLE
+                    R.id.menu_appearance -> binding.contentBiography.visibility = View.VISIBLE
+                    R.id.menu_stats -> binding.contentBiography.visibility = View.VISIBLE
+            }
+            true
+        }
+
+        binding.navigationView.selectedItemId = R.id.menu_biography
     }
 
     fun getSuperheroById(id: String) {
@@ -63,7 +77,17 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun loadData() {
-        nameTextView.text = superhero.name
-        Picasso.get().load(superhero.image.url).into(avatarImageView)
+        supportActionBar?.title = superhero.name
+        supportActionBar?.subtitle = superhero.biography.realName
+        Picasso.get().load(superhero.image.url).into(binding.avatarImageView)
+
+        //biography
+        binding.publisherTextView.text = superhero.biography.publisher
+        binding.placeOfBirthTextView.text = superhero.biography.placeOfBirth
+        binding.alignmentTextView.text = superhero.biography.alignment
+
+        //stats
+        binding.intelligenceProgress.progress = superhero.stats.intelligence.toIntOrNull() ?: 0
+        binding.intelligenceTextView.text = "${superhero.stats.intelligence.toIntOrNull() ?: 0}"
     }
 }
