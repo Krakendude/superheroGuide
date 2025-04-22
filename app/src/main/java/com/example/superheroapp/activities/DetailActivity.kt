@@ -45,15 +45,15 @@ class DetailActivity : AppCompatActivity() {
 
         getSuperheroById(id)
 
-        binding.navigationView.setOnItemSelectedListener { menuITem ->
+        binding.navigationView.setOnItemSelectedListener { menuItem ->
             binding.contentBiography.visibility = View.GONE
             binding.contentAppearance.visibility = View.GONE
             binding.contentStats.visibility = View.GONE
 
-            when (menuITem.itemId) {
+            when (menuItem.itemId) {
                 R.id.menu_biography -> binding.contentBiography.visibility = View.VISIBLE
-                    R.id.menu_appearance -> binding.contentBiography.visibility = View.VISIBLE
-                    R.id.menu_stats -> binding.contentBiography.visibility = View.VISIBLE
+                R.id.menu_appearance -> binding.contentAppearance.visibility = View.VISIBLE
+                R.id.menu_stats -> binding.contentStats.visibility = View.VISIBLE
             }
             true
         }
