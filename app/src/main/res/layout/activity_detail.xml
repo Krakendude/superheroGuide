@@ -18,7 +18,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -42,141 +41,26 @@
                 android:layout_height="wrap_content"
                 app:menu="@menu/activity_detail_navigation"/>
 
-            <LinearLayout
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+
+            <include
                 android:id="@+id/contentBiography"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="8dp">
+                layout="@layout/detail_content_biography"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Publisher:"
-                            android:textAlignment="textEnd"/>
-
-                        <TextView
-                            android:id="@+id/publisherTextView"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:layout_marginStart="4dp"
-                            tools:text="DC Comics"
-                            android:textStyle="bold"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Place of birth:"
-                            android:textAlignment="textEnd"/>
-
-                        <TextView
-                            android:id="@+id/placeOfBirthTextView"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:layout_marginStart="4dp"
-                            tools:text="America ya"
-                            android:textStyle="bold"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Alignment:"
-                            android:textAlignment="textEnd"/>
-
-                        <TextView
-                            android:id="@+id/alignmentTextView"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:layout_marginStart="4dp"
-                            tools:text="Mean bean"
-                            android:textStyle="bold"/>
-
-                </LinearLayout>
-
-
-
-            </LinearLayout>
-
-            <LinearLayout
+            <include
                 android:id="@+id/contentAppearance"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="8dp">
+                layout="@layout/detail_content_appearance"/>
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Appearance"/>
-
-            </LinearLayout>
-
-            <LinearLayout
+            <include
                 android:id="@+id/contentStats"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Intelligence"/>
-
-                    <TextView
-                        android:id="@+id/intelligenceTextView"
-                        android:layout_width="48dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:textStyle="bold"
-                        android:text="100"/>
-
-                    <com.google.android.material.progressindicator.LinearProgressIndicator
-                        android:id="@+id/intelligenceProgress"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:progress="30"
-                        android:layout_gravity="center_vertical"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
+                layout="@layout/detail_content_powerstats"/>
+            </FrameLayout>
 
         </LinearLayout>
 
-
     </androidx.cardview.widget.CardView>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
